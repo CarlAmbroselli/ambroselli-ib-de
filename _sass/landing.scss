@@ -1,0 +1,17 @@
+.landing { 
+    /* The image used */
+    background-image: url("/assets/images/landing.png");
+  
+    /* Full height */
+    height: 100vh; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -50;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

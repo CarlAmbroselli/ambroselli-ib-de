@@ -1,0 +1,9 @@
+$base-color: #c6538c;
+$main-font: "Lato";
+$nav-height: 45px;
+
+body {
+  font-family: $main-font;
+  min-height: 100vh;
+  padding-top: $nav-height;
+}
