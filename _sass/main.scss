@@ -1,9 +1,18 @@
 $base-color: #c6538c;
+$link-color: #333;
 $main-font: "Lato";
+$headlines-font: "Merriweather";
 $nav-height: 45px;
 
 body {
   font-family: $main-font;
   min-height: 100vh;
   padding-top: $nav-height;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1,h2,h3,h4,h5 {
+  font-family: $headlines-font;
 }
