@@ -1,57 +1,45 @@
 .index {
-
-    .landing { 
-        /* The image used */
-        background-image: url("/assets/images/landing.png");
-    
-        /* Full height */
-        height: 100vh; 
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: -50;
-    
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-
-        h2 {
-            font-family: $headlines-font;
-            position: absolute;
-            bottom: 20%;
-            left: 5%;
-            color: #FFFFFF;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.66);
-            font-size: 3em;
-            font-weight: 400;
+    .slideshow {
+        width: 60%;
+        display: inline-block;
+        img {
+            width: 100%;
         }
     }
+    .text {
+        width: 39%;
+        vertical-align: top;
+        padding-left: 3%;
+        display: inline-block;
 
-    .content-big {
-        padding-top: 50px;
-        h2,h3 {
-            text-align: center;
+        max-height: 650px;
+        overflow: scroll;
+        overflow-y: scroll;
+
+        h2 {
+            font-size: 1.6em;
+        }
+
+        p {
+            font-size: 1.2em;
             font-weight: 300;
         }
 
-        .subheadline {
-            max-width: 600px;
-            text-align: center;
-            margin-left: 50%;
-            transform: translateX(-50%);;
-            color: #333333;
+        .spacer {
+            width: 80px;
+            height: 1px;
+            background-color: $light-color;
+            margin: 70px 0;
         }
 
-        .content {
-            display: flex;
-            .item {
-                img {
-                    width: 200px;
-                }
-            }
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 7px;
         }
-
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0,0,0,.5);
+            -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+        }
     }
-
 }

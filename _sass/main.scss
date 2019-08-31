@@ -1,8 +1,16 @@
 $base-color: #c6538c;
 $link-color: #333;
-$main-font: "Lato";
-$headlines-font: "Merriweather";
+$dark-color: #333333;
+$background-color: #FFFFFF;
+$light-background-color: #FAF8F8;
+$light-color: #999999;
+$main-font: "Helvetica";
+$headlines-font: "Helvetica";
 $nav-height: 45px;
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: $main-font;
@@ -10,9 +18,12 @@ body {
   padding-top: $nav-height;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 h1,h2,h3,h4,h5 {
   font-family: $headlines-font;
+}
+
+.main-content {
+  margin: 180px 50px 0px;
 }
