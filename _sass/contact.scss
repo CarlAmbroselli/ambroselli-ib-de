@@ -1,0 +1,32 @@
+.contact {
+    display: flex;
+    flex-direction: row;
+
+    font-weight: 200;
+    padding: 20px;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    background-color: $light-background-color;
+
+    .details {
+        margin-left: 40px;
+    }
+
+    a {
+        &.no-highlight {
+            text-decoration: none;
+        }
+        color: initial;
+    }
+
+    .contact-options {
+        display: flex;
+        flex-direction: row;
+        p {
+            margin-right: 10px;
+        }
+        p:first-child {
+            margin-right: 50px;
+        }
+    }
+}
