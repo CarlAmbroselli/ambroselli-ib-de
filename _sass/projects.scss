@@ -1,0 +1,141 @@
+.projects-page {
+    
+    .links {
+        padding: 20px 0;
+        text-align: center;
+        .item {
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: $dark-color;
+            &.active {
+                background-color: $dark-color;
+                color: $white;
+            }
+        }
+    }
+
+    .items {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 50px;
+
+        .item {
+            min-width: 300px;
+            max-width: 300px;
+            flex: 1;
+            margin: 0px 40px 60px;
+            img.picture {
+                width: 100%;
+            }
+
+            p {
+                margin: 0;
+
+                &.headline {
+                    color: $subheadline-color;
+                    margin-top: 15px;
+                    font-weight: 600;
+                    font-size: 0.9em;
+                }
+                &.sub-headline {
+                    color: $light-color;
+                    font-size: 0.8em;
+                    margin-top: 5px;
+                }
+            }
+        }
+
+        .arrow {
+            width: 50px;
+            height: auto;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            margin-top: 40px;
+        }
+
+        .details {
+            width: 100%;
+            background-color: $light-background-color;
+            padding: 40px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            .slideshow {
+                max-width: 65%;
+                .arrow {
+                    display: block;
+                    content: '';
+                    background-image: url('/assets/svg/arrow.svg');
+                    width: 50px;
+                    height: 50px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    &.prev {
+                        position: absolute;
+                        top: 20px;
+                    }
+                    &.next {
+                        position: absolute;
+                        top: 20px;
+                    }
+                }
+                .slideshow-image {
+                    width: 100%;
+                }
+            }
+
+            .text {
+                padding-left: 50px;
+                max-width: 35%;
+                h3,h4 {
+                    margin: 0;
+                }
+                .description {
+                    color: $light-color;
+                    font-size: 0.8em;
+                    line-height: 1.7em;
+                }
+                .links {
+                    margin: 5px 0 0 0;
+                    padding: 0;
+                    max-height: 15vw;
+                    overflow: scroll;
+                    text-align: left;
+
+                    span {
+                        display: block;
+                        color: $light-color;
+                        font-size: 0.8em;
+                        line-height: 2em;
+                        cursor: pointer;
+
+                        &.active {
+                            color: $dark-color;
+                            font-weight: 600;
+                        }
+                    }
+
+                    &::-webkit-scrollbar {
+                        -webkit-appearance: none;
+                        width: 7px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 4px;
+                        background-color: rgba(0,0,0,.5);
+                        -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+                    }
+                }
+            }
+        }
+    }
+}
