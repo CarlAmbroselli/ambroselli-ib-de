@@ -1,12 +1,15 @@
 $base-color: #c6538c;
 $link-color: #333;
+$subheadline-color: #282828;
 $dark-color: #333333;
 $background-color: #FFFFFF;
 $light-background-color: #FAF8F8;
+$white: #FFFFFF;
 $light-color: #999999;
 $main-font: "Helvetica";
 $headlines-font: "Helvetica";
 $nav-height: 45px;
+$side-margin: 50px;
 
 * {
   box-sizing: border-box;
@@ -17,6 +20,8 @@ body {
   padding-top: $nav-height;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 h1,h2,h3,h4,h5 {
@@ -24,5 +29,6 @@ h1,h2,h3,h4,h5 {
 }
 
 .main-content {
-  margin: 180px 50px 0px;
+  margin: 180px $side-margin 0px;
+  flex: 1 0 auto;
 }

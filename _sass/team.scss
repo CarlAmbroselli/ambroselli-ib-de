@@ -1,0 +1,97 @@
+.team-page {
+    .header {
+        width: 100%;
+    }
+    .properties {
+        display: flex;
+        flex-flow: row;
+        p {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin: 50px 0;
+            color: $dark-color;
+            width: 33%;
+        }
+    }
+
+    .center-line {
+        text-align: center;
+        margin: 100px 0;
+
+        p {
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: $dark-color;
+        }
+    }
+    
+    .banner {
+        background-color: $light-background-color;
+        padding: $side-margin;
+        width: calc(100% + #{$side-margin} + #{$side-margin});
+        margin-left: -$side-margin;
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            .small-text {
+                color: $light-color;
+                font-size: 0.95em;
+                font-weight: 500;
+                line-height: 1.4em;
+            }
+
+            .card {
+                width: 450px;
+                margin-right: 5%;
+                border-radius: 10px;
+                background-color: $white;
+                box-shadow: 0 3px 5px 0 rgba(213,213,213,0.50);
+
+                img {
+                    width: 100%;
+                }
+                .text-content {
+                    padding: 15px;
+                    h2 {
+                        margin: 0;
+                        font-size: 1.2em;
+                        color: $subheadline-color;
+                    }
+
+                }
+            }
+
+            .persons {
+                .person {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin: 20px 0;
+                    margin: 7% 10px;
+
+                    img {
+                        width: 80px;
+                        height: auto;
+                    }
+
+                    h3 {
+                        margin: 0;
+                    }
+
+                    .right {
+                        margin-left: 20px;
+                        p {
+                            margin: 5px 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
