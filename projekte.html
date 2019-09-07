@@ -5,79 +5,15 @@ title: Team
 
 <div class="projects-page">
     <div class="links">
-        <span class="item active">Alle</span>
-        <span class="item">Neubau</span>
-        <span class="item">Umbau</span>
-        <span class="item">Baustellen-Details</span>
+        <span class="item active" onclick="loadAllProjects()" id="link-Alle">Alle</span>
+        <span class="item" onclick="loadAllProjects('Neubau')" id="link-Neubau">Neubau</span>
+        <span class="item" onclick="loadAllProjects('Umbau')" id="link-Umbau">Umbau</span>
+        <span class="item" onclick="loadAllProjects('Baustellen-Details')" id="link-Baustellen-Details">Baustellen-Details</span>
     </div>
 
     <div class="items">
-        <div class="item" style="order: 1">
-            <img class="picture" src="/assets/images/projects/1.png" />
-            <p class="headline">Köpenick 2018</p>
-            <p class="sub-headline">Neubau Einfamilienhaus</p>
-        </div>
-        <div class="item" style="order: 2">
-            <img class="picture" src="/assets/images/projects/2.png" />
-            <p class="headline">Köpenick 2018</p>
-            <p class="sub-headline">Neubau Einfamilienhaus</p>
-        </div>
-        <div class="item" style="order: 3">
-            <img class="picture" src="/assets/images/projects/3.png" />
-            <p class="headline">Köpenick 2018</p>
-            <p class="sub-headline">Neubau Einfamilienhaus</p>
-            <img class="construction-active-arrow" src="/assets/css/arrow.svg" />
-        </div>
-        <div class="item" style="order: 4">
-            <img class="picture" src="/assets/images/projects/4.png" />
-            <p class="headline">Köpenick 2018</p>
-            <p class="sub-headline">Neubau Einfamilienhaus</p>
-        </div>
-        <div class="item" style="order: 5">
-            <img class="picture" src="/assets/images/projects/5.png" />
-            <p class="headline">Köpenick 2018</p>
-            <p class="sub-headline">Neubau Einfamilienhaus</p>
-        </div>
-        <div class="item" style="order: 6">
-            <img class="picture" src="/assets/images/projects/6.png" />
-            <p class="headline">Köpenick 2018</p>
-            <p class="sub-headline">Neubau Einfamilienhaus</p>
-        </div>
-
-        <div class="details" style="order: 3">
-            <div class="slideshow">
-                <div class="slideshow-container">
-                    <span class="prev arrow"></span>
-                    <div class="slideshow-image" style="background-image: url('/assets/images/projects/details.png')"></div>
-                    <span class="next arrow"></span>
-                </div>
-            </div>
-
-            <div class="text">
-                <h3>Neubau Einfamilienhaus</h3>
-                <p class="description">Niedrigenergiehaus gemäß Anforderungen der EnEV; 
-                    Flachdach mit Attika; Außenwände aus Porenbeton-Mauerwerk; Kunststofffenster
-                     mit Dreifachverglasung; Fußbodenheizung; Luftwärmepumpe; bedarfsgeregelte 
-                     Abluftanlage; massiver Carport mit Schuppen</p>
-                <h4>Baubeginn: 10.01.2018</h4>
-                <div class="links">
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span class="active">21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                    <span>21.08.2018 Bewehrung Decke-EG</span>
-                </div>
-
-                <h4>Fertigstellung: 10.01.2018</h4>
-            </div>
-        </div>
     </div>
 
 </div>
+
+<script src="{{ base.url | prepend: site.url }}/js/projects.js"></script>
