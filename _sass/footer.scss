@@ -4,12 +4,17 @@
     flex-shrink: 0;
     padding: 20px 50px;
     z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     > div {
         display: inline-block;
         font-weight: 200;
         font-size: 1.1em;
         line-height: 1.5em;
+        min-width: 200px;
 
         a {
             color: inherit;
@@ -21,14 +26,11 @@
     }
 
     .contact {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        
     }
 
     .appointment {
-        position: absolute;
-        right: 50px;
+        
         font-weight: 500;
         color: #036DBE;
         padding-top: 15px;

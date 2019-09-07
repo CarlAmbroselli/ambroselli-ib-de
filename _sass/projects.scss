@@ -1,5 +1,7 @@
 .projects-page {
     
+
+
     .links {
         padding: 20px 0;
         text-align: center;
@@ -11,8 +13,8 @@
             border-radius: 5px;
             color: $dark-color;
             &.active {
-                background-color: $dark-color;
-                color: $white;
+                background-color: $selection-background-color;
+                color: $dark-color;
             }
         }
     }
@@ -22,15 +24,19 @@
         flex-direction: row;
         width: 100%;
         max-width: 1200px;
-        margin-left: 50%;
-        transform: translateX(-50%);
         flex-wrap: wrap;
-        justify-content: left;
+        justify-content: center;
         margin-top: 20px;
         margin-bottom: 50px;
 
+
+        @media screen and (min-width: $mobile-max-width) {
+            margin-left: 50%;
+            transform: translateX(-50%);
+        }
+
         .item {
-            min-width: 320px;
+            min-width: 270px;
             max-width: 320px;
             cursor: pointer;
             flex: 1;
@@ -70,6 +76,10 @@
 
         .details {
             width: calc(100% - 80px);
+            @media screen and (max-width: $mobile-max-width) {
+                width: 100%;
+            }
+            
             background-color: $light-background-color;
             padding: 40px;
             margin-bottom: 40px;
@@ -79,6 +89,16 @@
             max-height: 1000px;
             overflow: hidden;
             transition: max-height 0.25s ease-in;
+
+            .mobile-image {
+                display: none;
+                @media screen and (max-width: $mobile-max-width) {
+                    display: block;
+                    width: 100%;
+                    height: auto;
+                    margin-bottom: 20px;
+                }
+            }
 
             &.hidden {
                 max-height: 0;
@@ -103,6 +123,9 @@
             .slideshow {
                 width: 65%;
                 height: 100%;
+                @media screen and (max-width: $mobile-max-width) {
+                    display: none;
+                }
 
                 .slideshow-container {
                     position: relative;
@@ -150,6 +173,29 @@
             .text {
                 padding-left: 50px;
                 max-width: 35%;
+                @media screen and (max-width: $mobile-max-width) {
+                    max-width: initial;
+                    padding-left: initial;
+                    display: flex;
+                    flex-direction: column;
+                    .details-headline {
+                        order: 1;
+                    }
+                    .description {
+                        order: 2;
+                    }
+                    .construction-start {
+                        order: 3;
+                        margin-bottom: 10px;
+                    }
+                    .construction-end {
+                        order: 4;
+                        margin-bottom: 10px;
+                    }
+                    .links {
+                        order: 5;
+                    }
+                }
                 h3,h4 {
                     margin: 0;
                 }
@@ -164,6 +210,10 @@
                     max-height: 15vw;
                     overflow: scroll;
                     text-align: left;
+
+                    @media screen and (max-width: $mobile-max-width) {
+                        max-height: initial;
+                    }
 
                     span {
                         display: block;

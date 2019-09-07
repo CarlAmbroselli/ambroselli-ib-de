@@ -87,13 +87,13 @@ function createDetails(project, index) {
         '            </div>' +
         '' +
         '            <div class="text">' +
-        '                <h3>' + detailsHeadline + '</h3>';
+        '                <h3 class="details-headline">' + detailsHeadline + '</h3>';
 
         if (project.details_description) {
             html = html + '<p class="description">' + project.details_description + '</p>'
         };
         if (project.construction_start) {
-            html = html + '<h4>Baubeginn: ' + project.construction_start + '</h4>'
+            html = html + '<h4 class="construction-start">Baubeginn: ' + project.construction_start + '</h4>'
         };
         html = html +
         '                <div class="links">';
@@ -105,6 +105,7 @@ function createDetails(project, index) {
                     date = item.meta.date + ' '
                 }
                 html += '<span>' + date + item.meta.title + '</span>'
+                html += '<img src="' + backend + item.path + '" class="mobile-image" />'
             })
         }
         html = html +
@@ -112,7 +113,7 @@ function createDetails(project, index) {
 
         if (project.construction_end) {
             var start = new Date()
-            html = html + '<h4>Fertigstellung: ' + project.construction_end + '</h4>'
+            html = html + '<h4 class="construction-end">Fertigstellung: ' + project.construction_end + '</h4>'
         };
         html = html +
         '            </div>' +
