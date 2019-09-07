@@ -1,5 +1,4 @@
-// var backend = 'https://anpassen.ambroselli-ib.de'
-var backend = 'http://206.189.50.176'
+var backend = 'https://anpassen.ambroselli-ib.de'
 var backendReponse = {}
 var activeImageIndex = 0;
 var activeProjectIndex;
