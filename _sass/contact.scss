@@ -2,6 +2,27 @@
     display: flex;
     flex-direction: row;
 
+    .mobile-only {
+        display: none;
+    }
+
+    @media screen and (max-width: $mobile-max-width) {
+        flex-direction: column;
+        margin-bottom: 50px;
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .nomobile {
+            display: none;
+        }
+
+        .mobile-only {
+            display: initial
+        }
+    }
+
     font-weight: 200;
     padding: 20px;
     font-size: 1.1em;
@@ -28,6 +49,9 @@
         margin: 0;
         display: flex;
         flex-direction: row;
+        @media screen and (max-width: $mobile-max-width) {
+            flex-direction: column;
+        }
         p {
             margin-right: 10px;
         }
