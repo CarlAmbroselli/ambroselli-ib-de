@@ -13,11 +13,24 @@
             color: $dark-color;
             width: 33%;
         }
+
+        @media screen and (max-width: $mobile-max-width) {
+            flex-flow: column;
+            margin: 20px 0;
+            p {
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
     }
 
     .center-line {
         text-align: center;
         margin: 100px 0;
+
+        @media screen and (max-width: $mobile-max-width) {
+            margin: 40px 0;
+        }
 
         p {
             text-align: center;
@@ -39,6 +52,10 @@
             align-items: center;
             justify-content: center;
 
+            @media screen and (max-width: $mobile-max-width) {
+                flex-direction: column;
+            }
+
             .small-text {
                 color: $light-color;
                 font-size: 0.95em;
@@ -52,6 +69,11 @@
                 border-radius: 10px;
                 background-color: $white;
                 box-shadow: 0 3px 5px 0 rgba(213,213,213,0.50);
+
+                @media screen and (max-width: $mobile-max-width) {
+                    width: calc(100% - 40px);
+                    margin-right: 0;
+                }
 
                 img {
                     width: 100%;
