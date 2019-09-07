@@ -166,14 +166,24 @@ function showPreviousGalleryImage() {
 
 function updateSlideshowArrows() {
     var gallery = backendReponse[activeProjectIndex].gallery;
+    var next = document.querySelector('.details:not(.hidden) .slideshow-container .next.arrow')
+    var prev = document.querySelector('.details:not(.hidden) .slideshow-container .prev.arrow')
+
+    if (!next || !prev) {
+        return
+    }
     if (gallery.length >= activeImageIndex) {
-        document.querySelector('.slideshow-container .next.arrow').style = ""
+        next.style = ""
     }
     if (gallery.length <= activeImageIndex+1) {
-        document.querySelector('.slideshow-container .next.arrow').style = "display: none"
+        next.style = "display: none"
     }
     if (activeImageIndex == 0) {
-        document.querySelector('.slideshow-container .prev.arrow').style = "display: none";
+        prev.style = "display: none";
+    }
+    if (gallery.length <= 1) {
+        prev.style = "display: none"
+        next.style = "display: none"
     }
 }
 
@@ -201,10 +211,6 @@ function showDetails(index, onlyResize) {
     if (!onlyResize) {
         activeImageIndex = 0;
         activeProjectIndex = index;
-        var gallery = backendReponse[activeProjectIndex].gallery;
-        document.querySelector('.slideshow-container .prev.arrow').style = "display: none";
-        
-    updateSlideshowArrows()
     }
 
     for (i = 0; i < divs.length; ++i) {
@@ -216,6 +222,7 @@ function showDetails(index, onlyResize) {
         }
     }
 
+    updateSlideshowArrows()
     showCorrectArrow(index)
 }
 
