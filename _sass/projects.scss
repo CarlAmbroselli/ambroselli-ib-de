@@ -226,6 +226,14 @@
                             color: $dark-color;
                             font-weight: 600;
                         }
+
+                        @media screen and (max-width: $mobile-max-width) {
+                            
+                            &.active {
+                                color: $light-color;
+                                font-weight: initial;
+                            }
+                        }
                     }
 
                     &::-webkit-scrollbar {

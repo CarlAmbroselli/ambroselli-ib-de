@@ -28,13 +28,13 @@ nav.main {
                 display: block;
             }
         }
+    }
 
-        h2 {
-            margin-top: 10px;
-            font-size: 21px;
-            font-weight: 100;
-            color: $light-color;
-        }
+    h2 {
+        margin-top: 10px;
+        font-size: 22px;
+        font-weight: 100;
+        color: $light-color;
     }
 
     @media screen and (max-width: $nav-mobile-max-width) {
