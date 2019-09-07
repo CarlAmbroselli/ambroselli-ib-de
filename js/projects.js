@@ -1,4 +1,8 @@
-var backend = 'https://anpassen.ambroselli-ib.de'
+// var backend = 'https://anpassen.ambroselli-ib.de'
+var backend = 'http://206.189.50.176'
+var backendReponse = {}
+var activeImageIndex = 0;
+var activeProjectIndex;
 
 function loadJSON(path, success, error) {
     var xhr = new XMLHttpRequest();
@@ -28,6 +32,7 @@ function createElementFromHTML(htmlString) {
 function loadAllProjects(filter) {
     highlightActiveLink(filter);
     loadJSON(backend + '/api/collections/get/Projekte', function(result) {
+        backendReponse = result.entries;
         document.querySelector('.projects-page .items').innerHTML = ''
         result.entries.forEach(function(element, index) {
             if (filter && filter !== element.category) { return }
@@ -77,9 +82,9 @@ function createDetails(project, index) {
         '                <div class="slideshow-container">';
         if (project.gallery.length > 0) {
          html = html +
-            '                    <span class="prev arrow"></span>' +
+            '                    <span class="prev arrow" onclick="showPreviousGalleryImage()"></span>' +
             '                    <div class="slideshow-image" style="background-image: url(\'' + backend + project.gallery[0].path+ '\')"></div>' +
-            '                    <span class="next arrow"></span>';
+            '                    <span class="next arrow" onclick="showNextGalleryImage()"></span>';
         }
 
         html = html +
@@ -137,6 +142,41 @@ function showCorrectArrow(index) {
     }
 }
 
+function showGalleryImage(index) {
+    var gallery = backendReponse[activeProjectIndex].gallery;
+    activeImageIndex = index;
+    var image = document.querySelector('.items .details#project-' + activeProjectIndex + ' .slideshow-container .slideshow-image')
+    image.style = "background-image: url('" + backend + gallery[activeImageIndex].path + "')"
+    updateSlideshowArrows()
+}
+
+function showNextGalleryImage() {
+    var gallery = backendReponse[activeProjectIndex].gallery;
+    document.querySelector('.slideshow-container .prev.arrow').style = "";
+    if (gallery.length > activeImageIndex+1) {
+        showGalleryImage(activeImageIndex+1)
+    }
+}
+
+function showPreviousGalleryImage() {
+    if (activeImageIndex > 0) {
+        showGalleryImage(activeImageIndex-1)
+    }
+}
+
+function updateSlideshowArrows() {
+    var gallery = backendReponse[activeProjectIndex].gallery;
+    if (gallery.length >= activeImageIndex) {
+        document.querySelector('.slideshow-container .next.arrow').style = ""
+    }
+    if (gallery.length <= activeImageIndex+1) {
+        document.querySelector('.slideshow-container .next.arrow').style = "display: none"
+    }
+    if (activeImageIndex == 0) {
+        document.querySelector('.slideshow-container .prev.arrow').style = "display: none";
+    }
+}
+
 function getDetailsPosition(index) {
     var items = document.querySelectorAll('.items .item'), i, activeElement;
     var highestIndex = index;
@@ -156,8 +196,16 @@ function getDetailsPosition(index) {
     return highestIndex+1;
 }
 
-function showDetails(index) {
+function showDetails(index, onlyResize) {
     var divs = document.querySelectorAll('.items .details'), i;
+    if (!onlyResize) {
+        activeImageIndex = 0;
+        activeProjectIndex = index;
+        var gallery = backendReponse[activeProjectIndex].gallery;
+        document.querySelector('.slideshow-container .prev.arrow').style = "display: none";
+        
+    updateSlideshowArrows()
+    }
 
     for (i = 0; i < divs.length; ++i) {
         if (divs[i].id === 'project-' + index) {
@@ -181,7 +229,7 @@ function refreshProjectsOrder() {
     if (activeDetails) {
         var index = parseInt(activeDetails.id.replace('project-', ''))
         hideDetails(index)
-        showDetails(index)
+        showDetails(index, true)
     }
 }
 
