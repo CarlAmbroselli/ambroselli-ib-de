@@ -104,12 +104,12 @@ function createDetails(project, index) {
         '                <div class="links">';
 
         if (project.gallery) {
-            project.gallery.forEach(function(item) {
+            project.gallery.forEach(function(item, index) {
                 var date = ''
                 if (item.meta.date) {
                     date = item.meta.date + ' '
                 }
-                html += '<span>' + date + item.meta.title + '</span>'
+                html += '<span onclick="showGalleryImage(' + index + ')">' + date + item.meta.title + '</span>'
                 html += '<img src="' + backend + item.path + '" class="mobile-image" />'
             })
         }
@@ -148,6 +148,7 @@ function showGalleryImage(index) {
     var image = document.querySelector('.items .details#project-' + activeProjectIndex + ' .slideshow-container .slideshow-image')
     image.style = "background-image: url('" + backend + gallery[activeImageIndex].path + "')"
     updateSlideshowArrows()
+    highlightActiveSlideshowLink()
 }
 
 function showNextGalleryImage() {
@@ -187,6 +188,17 @@ function updateSlideshowArrows() {
     }
 }
 
+function highlightActiveSlideshowLink() {
+    var links = document.querySelectorAll('.details:not(.hidden) .links span');
+    for (i = 0; i < links.length; ++i) {
+        if (i == activeImageIndex) {
+            links[i].className = "active"
+        } else {
+            links[i].className = ""
+        }
+    }
+}
+
 function getDetailsPosition(index) {
     var items = document.querySelectorAll('.items .item'), i, activeElement;
     var highestIndex = index;
@@ -223,6 +235,7 @@ function showDetails(index, onlyResize) {
     }
 
     updateSlideshowArrows()
+    highlightActiveSlideshowLink()
     showCorrectArrow(index)
 }
 
