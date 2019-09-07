@@ -12,6 +12,7 @@ $headlines-font: "Helvetica";
 $nav-height: 45px;
 $side-margin: 50px;
 $mobile-max-width: 800px;
+$nav-mobile-max-width: 1230px;
 
 * {
   box-sizing: border-box;
@@ -33,7 +34,7 @@ h1,h2,h3,h4,h5 {
 
 .main-content {
   margin: 180px $side-margin 0px;
-  @media screen and (max-width: $mobile-max-width) {
+  @media screen and (max-width: $nav-mobile-max-width) {
     margin: 0;
   }
   flex: 1 0 auto;

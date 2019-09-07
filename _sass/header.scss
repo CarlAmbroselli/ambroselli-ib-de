@@ -3,8 +3,15 @@ nav.main {
     background-color: $background-color;
     position: fixed;
     left: 10px;
+    @media screen and (max-width: $nav-mobile-max-width) {
+       left: 0px;
+    }
     width: 100%;
     z-index: 50;
+
+    @media screen and (max-width: $nav-mobile-max-width) {
+        position: relative;
+    }
 
     .logo {
         text-decoration: none;
@@ -16,6 +23,12 @@ nav.main {
             display: inline-block;
         }
 
+        @media screen and (max-width: $nav-mobile-max-width) {
+            h1 {
+                display: block;
+            }
+        }
+
         h2 {
             margin-top: 10px;
             font-size: 21px;
@@ -24,11 +37,34 @@ nav.main {
         }
     }
 
+    @media screen and (max-width: $nav-mobile-max-width) {
+        h1, h2 {
+            text-align: center;
+            display: block;
+        }
+
+        h2 {
+            font-size: 1.2em;
+        }
+    }
+
     .menu {
         padding-right: 20px;
         top: 84px;
         position: absolute;
         right: 40px;
+
+        @media screen and (max-width: $nav-mobile-max-width) {
+            position: relative;
+            top: 15px;
+            right: initial;
+            padding-right: 0;
+            a {
+                display: block;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+        }
 
         a {
             text-decoration: none;
