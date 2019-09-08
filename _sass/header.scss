@@ -59,10 +59,19 @@ nav.main {
             top: 15px;
             right: initial;
             padding-right: 0;
+            text-align: center;
+            display: block;
+            margin-bottom: 15px;
             a {
-                display: block;
                 margin-bottom: 10px;
                 text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 720px) {
+            margin-bottom: initial;
+            a {
+                display: block;
             }
         }
 
