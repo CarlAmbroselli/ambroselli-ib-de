@@ -41,8 +41,8 @@ function createReference(reference) {
         '<div class="reference">' +
         '    <p class="date">' + reference.datum + '</p>' +
         '    <div class="text">' +
-        '        <h2>' + reference.text + '</h2>' +
-        '        <p></p>' +
+        '        <h2>' + reference.ueberschrift + '</h2>' +
+        '        <p>' + reference.text + '</p>' +
         '    </div>' +
         '</div>'
         )
