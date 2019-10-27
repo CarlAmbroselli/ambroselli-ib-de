@@ -49,3 +49,5 @@ function createReference(reference) {
 
     document.querySelector('.references-page').appendChild(projectElement)
 }
+
+loadReferences()
