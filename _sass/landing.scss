@@ -1,6 +1,6 @@
 .index {
     background-color: $light-background-color;
-    max-height: calc(100vh - 380px);
+    max-height: calc(100vh - 340px);
     display: flex;
     @media screen and (max-width: $mobile-max-width) {
         flex-direction: column;
