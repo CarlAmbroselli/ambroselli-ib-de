@@ -43,6 +43,7 @@
     .banner {
         background-color: $light-background-color;
         padding: $side-margin;
+        padding-left: $side-margin+10px;
         width: calc(100% + #{$side-margin} + #{$side-margin});
         margin-left: -$side-margin;
 
