@@ -1,30 +1,6 @@
-var backend = 'https://anpassen.ambroselli-ib.de'
-var backendReponse = {}
-
-function loadJSON(path, success, error) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                if (success)
-                    success(JSON.parse(xhr.responseText));
-            } else {
-                if (error)
-                    error(xhr);
-            }
-        }
-    };
-    xhr.open("GET", path, true);
-    xhr.send();
-}
-
-function createElementFromHTML(htmlString) {
-    var div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-
-    // Change this to div.childNodes to support multiple top-level nodes
-    return div.firstChild; 
-}
+---
+---
+{% include_relative backend.js %}
 
 function loadReferences() {
     loadJSON(backend + '/api/collections/get/bauherren', function(result) {
@@ -41,6 +17,7 @@ function createReference(reference) {
         '<div class="reference">' +
         '    <p class="date">' + reference.datum + '</p>' +
         '    <div class="text">' +
+        '        <div class="background" style="background-image: url(\'' + getThumbnail(reference.background.path, 1200) + '\'); opacity: '+ reference.transparency + '"></div>' +
         '        <h2>' + reference.ueberschrift + '</h2>' +
         '        <p>' + reference.text + '</p>' +
         '    </div>' +

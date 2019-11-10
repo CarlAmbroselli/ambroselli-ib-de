@@ -1,32 +1,10 @@
-var backend = 'https://anpassen.ambroselli-ib.de'
-var backendReponse = {}
+---
+---
+{% include_relative backend.js %}
+
 var activeImageIndex = 0;
 var activeProjectIndex;
 
-function loadJSON(path, success, error) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                if (success)
-                    success(JSON.parse(xhr.responseText));
-            } else {
-                if (error)
-                    error(xhr);
-            }
-        }
-    };
-    xhr.open("GET", path, true);
-    xhr.send();
-}
-
-function createElementFromHTML(htmlString) {
-    var div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
-
-    // Change this to div.childNodes to support multiple top-level nodes
-    return div.firstChild; 
-}
 
 function loadAllProjects(filter) {
     highlightActiveLink(filter);
@@ -59,7 +37,7 @@ function highlightActiveLink(selection) {
 function createProject(project, index) {
     var projectElement = createElementFromHTML(
         '<div class="item" style="order: ' + index + '" id="item-' + index + '" onclick="showDetails(' + index + ')">' +
-        '   <img class="picture" src="' + backend + '/storage/uploads' + project.title_picture.path + '" />' +
+        '   <img class="picture" src="' + getThumbnail('/storage/uploads' + project.title_picture.path, 640) + '" />' +
         '   <p class="headline">' + project.headline + '</p>' +
         '   <p class="sub-headline">' + project.subheadline + '</p>' +
         '   <img class="construction-active-arrow hidden" src="/assets/css/arrow.svg" />' +
@@ -82,7 +60,7 @@ function createDetails(project, index) {
         if (project.gallery.length > 0) {
          html = html +
             '                    <span class="prev arrow" onclick="showPreviousGalleryImage()"></span>' +
-            '                    <div class="slideshow-image" style="background-image: url(\'' + backend + project.gallery[0].path+ '\')"></div>' +
+            '                    <div class="slideshow-image" style="background-image: url(\'' + getThumbnail(project.gallery[0].path, 800) + '\')"></div>' +
             '                    <span class="next arrow" onclick="showNextGalleryImage()"></span>';
         }
 
@@ -109,7 +87,7 @@ function createDetails(project, index) {
                     date = item.meta.date + ' '
                 }
                 html += '<span onclick="showGalleryImage(' + index + ')">' + date + item.meta.title + '</span>'
-                html += '<img src="' + backend + item.path + '" class="mobile-image" />'
+                html += '<img src="' + getThumbnail(item.path) + '" class="mobile-image" />'
             })
         }
         html = html +
@@ -145,7 +123,7 @@ function showGalleryImage(index) {
     var gallery = backendReponse[activeProjectIndex].gallery;
     activeImageIndex = index;
     var image = document.querySelector('.items .details#project-' + activeProjectIndex + ' .slideshow-container .slideshow-image')
-    image.style = "background-image: url('" + backend + gallery[activeImageIndex].path + "')"
+    image.style = "background-image: url('" + getThumbnail(gallery[activeImageIndex].path, 800) + "')"
     updateSlideshowArrows()
     highlightActiveSlideshowLink()
 }

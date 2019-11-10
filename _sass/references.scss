@@ -16,11 +16,8 @@
             position: relative;
             padding: 40px;
 
-            &::after {
+            .background {
                 content: "";
-                background-image: url("/assets/images/references/1.jpeg");
-
-                opacity: 0.3;
                 position: absolute;
                 left: 0;
                 top: 0;
