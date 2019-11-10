@@ -158,6 +158,8 @@ function updateSlideshowArrows() {
     }
     if (activeImageIndex == 0) {
         prev.style = "display: none";
+    } else {
+        prev.style = "";
     }
     if (gallery.length <= 1) {
         prev.style = "display: none"
