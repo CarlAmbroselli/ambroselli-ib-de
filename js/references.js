@@ -15,10 +15,10 @@ function loadReferences() {
 function createReference(reference) {
     var projectElement = createElementFromHTML(
         '<div class="reference">' +
-        '    <p class="date">' + reference.datum + '</p>' +
+        '    <p class="date">' + reference.date + '</p>' +
         '    <div class="text">' +
         '        <div class="background" style="background-image: url(\'' + getThumbnail(reference.background.path, 1200) + '\'); opacity: '+ reference.transparency + '"></div>' +
-        '        <h2>' + reference.ueberschrift + '</h2>' +
+        '        <h2>' + reference.headline + '</h2>' +
         '        <p>' + reference.text + '</p>' +
         '    </div>' +
         '</div>'
