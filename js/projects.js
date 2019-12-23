@@ -6,13 +6,13 @@ var activeImageIndex = 0;
 var activeProjectIndex;
 
 
-function loadAllProjects(filter) {
+function loadAllProjects(filter, category='Projekte') {
     highlightActiveLink(filter);
-    loadJSON(backend + '/api/collections/get/Projekte', function(result) {
+    loadJSON(backend + '/api/collections/get/' + category, function(result) {
         backendReponse = result.entries;
         document.querySelector('.projects-page .items').innerHTML = ''
         result.entries.forEach(function(element, index) {
-            if (filter && filter !== element.category) { return }
+            if (category !== 'highlights' && filter && filter !== element.category) { return }
             createProject(element, index)
             createDetails(element, index)
         })
@@ -37,9 +37,9 @@ function highlightActiveLink(selection) {
 function createProject(project, index) {
     var projectElement = createElementFromHTML(
         '<div class="item" style="order: ' + index + '" id="item-' + index + '" onclick="showDetails(' + index + ')">' +
-        '   <img class="picture" src="' + getThumbnail('/storage/uploads' + project.title_picture.path, 640) + '" />' +
+        '   <img class="picture" src="' + getThumbnail('/storage/uploads' + project.title_picture.path.replace('/storage/uploads', ''), 640) + '" />' +
         '   <p class="headline">' + project.headline + '</p>' +
-        '   <p class="sub-headline">' + project.subheadline + '</p>' +
+        (project.subheadline ? '   <p class="sub-headline">' + project.subheadline + '</p>' : '') + 
         '   <img class="construction-active-arrow hidden" src="/assets/css/arrow.svg" />' +
         '</div>'
     )
