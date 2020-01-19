@@ -29,5 +29,5 @@ function createElementFromHTML(htmlString) {
 
 function getThumbnail(path, width) {
     width = width || 1000;
-    return backend + '/api/cockpit/image?token=' + imageToken + '&w=' + width + '&m=thumbnail&o=true&q=90&src=' + path
+    return backend + '/cockpit/utils/thumb_url?token=' + imageToken + '&w=' + width + '&m=bestFit&o=1&src=' +  path
 }

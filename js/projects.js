@@ -3,6 +3,7 @@
 {% include_relative backend.js %}
 
 var activeImageIndex = 0;
+var itemsPerLoad = 3;
 var activeProjectIndex;
 
 
@@ -11,12 +12,21 @@ function loadAllProjects(filter, category='Projekte') {
     loadJSON(backend + '/api/collections/get/' + category, function(result) {
         backendReponse = result.entries;
         document.querySelector('.projects-page .items').innerHTML = ''
-        result.entries.forEach(function(element, index) {
-            if (category !== 'highlights' && filter && filter !== element.category) { return }
-            createProject(element, index)
-            createDetails(element, index)
-        })
+        loadNextProjects(result.entries, category, filter, 0)
     })
+}
+
+function loadNextProjects(remainingProjects, category, filter, offset) {
+    remainingProjects.slice(0,itemsPerLoad).forEach(function(element, index) {
+        if (category !== 'highlights' && filter && filter !== element.category) { return }
+        createProject(element, index+offset)
+        createDetails(element, index+offset)
+    })
+    if (remainingProjects.length > itemsPerLoad) {
+        window.setTimeout(function() {
+            loadNextProjects(remainingProjects.slice(itemsPerLoad), category, filter, offset+itemsPerLoad)
+        }, 2000);
+    }
 }
 
 function highlightActiveLink(selection) {
