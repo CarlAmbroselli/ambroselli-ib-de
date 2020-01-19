@@ -25,7 +25,7 @@ function loadNextProjects(remainingProjects, category, filter, offset) {
     if (remainingProjects.length > itemsPerLoad) {
         window.setTimeout(function() {
             loadNextProjects(remainingProjects.slice(itemsPerLoad), category, filter, offset+itemsPerLoad)
-        }, 2000);
+        }, 3000);
     }
 }
 
