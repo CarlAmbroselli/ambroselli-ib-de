@@ -1,5 +1,5 @@
 var imageToken = "b36f5945dfa236521592b259136ec2";
-var backend = 'https://anpassen.ambroselli-ib.de'
+var backend = 'https://ambroselli-ib.de/anpassen'
 var backendReponse = {}
 
 function loadJSON(path, success, error) {
@@ -29,5 +29,8 @@ function createElementFromHTML(htmlString) {
 
 function getThumbnail(path, width) {
     width = width || 1000;
+    if (path.indexOf('/storage/' == 0)) {
+        path = '/anpassen' + path
+    }
     return backend + '/cockpit/utils/thumb_url?token=' + imageToken + '&w=' + width + '&m=bestFit&o=1&src=' +  path
 }

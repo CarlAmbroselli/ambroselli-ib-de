@@ -3,7 +3,7 @@
 {% include_relative backend.js %}
 
 var activeImageIndex = 0;
-var itemsPerLoad = 3;
+var itemsPerLoad = 9;
 var activeProjectIndex;
 
 
@@ -25,7 +25,7 @@ function loadNextProjects(remainingProjects, category, filter, offset) {
     if (remainingProjects.length > itemsPerLoad) {
         window.setTimeout(function() {
             loadNextProjects(remainingProjects.slice(itemsPerLoad), category, filter, offset+itemsPerLoad)
-        }, 3000);
+        }, 1000);
     }
 }
 
