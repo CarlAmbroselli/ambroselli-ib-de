@@ -32,5 +32,6 @@ function getThumbnail(path, width) {
     if (path.indexOf('/storage/' == 0)) {
         path = '/anpassen' + path
     }
+    path = path.replace('/anpassen/anpassen', '/anpassen')
     return backend + '/cockpit/utils/thumb_url?token=' + imageToken + '&w=' + width + '&m=bestFit&o=1&src=' +  path
 }
