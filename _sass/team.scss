@@ -29,7 +29,13 @@
 
     .center-line {
         text-align: center;
-        margin: 100px 0;
+        background-color: $light-background-color;
+        margin-bottom: 100px;
+        padding: 100px 20%;
+
+        @media screen and (max-width: $mobile-max-width) {
+            padding: 50px 20px;
+        }
 
         @media screen and (max-width: $mobile-max-width) {
             margin: 40px 0;
@@ -39,6 +45,24 @@
             text-align: center;
             font-size: 1.3em;
             font-weight: 600;
+            color: $dark-color;
+        }
+    }
+
+    .additional-Information {
+        text-align: center;
+        padding-top: 100px;
+        
+        padding: 100px 20%;
+
+        @media screen and (max-width: $mobile-max-width) {
+            padding: 50px 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1em;
+            font-weight: 200;
             color: $dark-color;
         }
     }
