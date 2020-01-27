@@ -27,7 +27,7 @@ function createElementFromHTML(htmlString) {
     return div.firstChild; 
 }
 
-function getThumbnail(path, width, quality=100) {
+function getThumbnail(path, width, quality=80) {
     width = width || 1000;
     if (path.indexOf('/storage/uploads') != 0 && path.indexOf('/anpassen') == -1) {
         path = '/anpassen/storage/uploads' + path
