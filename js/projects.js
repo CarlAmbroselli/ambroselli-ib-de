@@ -53,7 +53,7 @@ function highlightActiveLink(selection) {
 function createProject(project, index) {
     var projectElement = createElementFromHTML(
         '<div class="item" style="order: ' + index + '" id="item-' + index + '" onclick="showDetails(' + index + ')">' +
-        '   <img class="picture" src="' + getThumbnail(project.title_picture.path, 640) + '" />' +
+        '   <img class="picture" src="' + getThumbnail(project.title_picture.path, 640, 50) + '" />' +
         '   <p class="headline">' + project.headline + '</p>' +
         (project.subheadline ? '   <p class="sub-headline">' + project.subheadline + '</p>' : '') + 
         '   <img class="construction-active-arrow hidden" src="/assets/css/arrow.svg" />' +

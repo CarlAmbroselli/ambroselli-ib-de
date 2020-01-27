@@ -27,7 +27,7 @@ function createElementFromHTML(htmlString) {
     return div.firstChild; 
 }
 
-function getThumbnail(path, width) {
+function getThumbnail(path, width, quality=100) {
     width = width || 1000;
     if (path.indexOf('/storage/uploads') != 0 && path.indexOf('/anpassen') == -1) {
         path = '/anpassen/storage/uploads' + path
@@ -35,5 +35,5 @@ function getThumbnail(path, width) {
         path = '/anpassen' + path
     }
     path = path.replace('/anpassen/anpassen', '/anpassen')
-    return backend + '/api/cockpit/image?token=' + imageToken + '&w=' + width + '&m=thumbnail&o=1&src=' + path
+    return backend + '/api/cockpit/image?token=' + imageToken + '&w=' + width + '&m=thumbnail&o=1&q=' + quality + '&src=' + path
 }
