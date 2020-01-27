@@ -5,18 +5,24 @@
 var activeImageIndex = 0;
 var itemsPerLoad = 9;
 var activeProjectIndex;
+var activeLoadId = ""
 
 
 function loadAllProjects(filter, category='Projekte') {
     highlightActiveLink(filter);
+    activeLoadId = generateId()
     loadJSON(backend + '/api/collections/get/' + category, function(result) {
         backendReponse = result.entries;
         document.querySelector('.projects-page .items').innerHTML = ''
-        loadNextProjects(result.entries, category, filter, 0)
+        loadNextProjects(result.entries, category, filter, 0, activeLoadId)
     })
 }
 
-function loadNextProjects(remainingProjects, category, filter, offset) {
+function loadNextProjects(remainingProjects, category, filter, offset, currentLoadId) {
+    // this is an outdated call, we already clicked a new link
+    if (activeLoadId !== currentLoadId) {
+        return;
+    }
     remainingProjects.slice(0,itemsPerLoad).forEach(function(element, index) {
         if (category !== 'highlights' && filter && filter !== element.category) { return }
         createProject(element, index+offset)
@@ -24,8 +30,8 @@ function loadNextProjects(remainingProjects, category, filter, offset) {
     })
     if (remainingProjects.length > itemsPerLoad) {
         window.setTimeout(function() {
-            loadNextProjects(remainingProjects.slice(itemsPerLoad), category, filter, offset+itemsPerLoad)
-        }, 1000);
+            loadNextProjects(remainingProjects.slice(itemsPerLoad), category, filter, offset+itemsPerLoad, currentLoadId)
+        }, 1500);
     }
 }
 
@@ -47,7 +53,7 @@ function highlightActiveLink(selection) {
 function createProject(project, index) {
     var projectElement = createElementFromHTML(
         '<div class="item" style="order: ' + index + '" id="item-' + index + '" onclick="showDetails(' + index + ')">' +
-        '   <img class="picture" src="' + getThumbnail('/storage/uploads' + project.title_picture.path.replace('/storage/uploads', ''), 640) + '" />' +
+        '   <img class="picture" src="' + getThumbnail(project.title_picture.path, 640) + '" />' +
         '   <p class="headline">' + project.headline + '</p>' +
         (project.subheadline ? '   <p class="sub-headline">' + project.subheadline + '</p>' : '') + 
         '   <img class="construction-active-arrow hidden" src="/assets/css/arrow.svg" />' +
@@ -240,6 +246,10 @@ function refreshProjectsOrder() {
         hideDetails(index)
         showDetails(index, true)
     }
+}
+
+function generateId() {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
 function main() {

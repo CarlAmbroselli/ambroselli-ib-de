@@ -29,7 +29,9 @@ function createElementFromHTML(htmlString) {
 
 function getThumbnail(path, width) {
     width = width || 1000;
-    if (path.indexOf('/storage/' == 0)) {
+    if (path.indexOf('/storage/uploads') != 0 && path.indexOf('/anpassen') == -1) {
+        path = '/anpassen/storage/uploads' + path
+    } else if (path.indexOf('/storage/' == 0)) {
         path = '/anpassen' + path
     }
     path = path.replace('/anpassen/anpassen', '/anpassen')
