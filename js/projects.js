@@ -164,7 +164,27 @@ function createDetails(project, index) {
     var detailsElement =  detailsElement = createElementFromHTML(html)
 
     document.querySelector('.projects-page .items').appendChild(detailsElement)
-    new Glide('.glide#'+glideId).mount()
+    var glide = new Glide('.glide#'+glideId)
+
+    glide.on('run', function (e) {
+        var newIndex = glide.index
+        highlightCurrentPhoto(newIndex)
+      })
+
+    glide.mount()
+}
+
+function highlightCurrentPhoto(index) {
+    console.log("highlight", index)
+    var divs = document.querySelectorAll('.timeline .dot');
+    for (i = 0; i < divs.length; ++i) {
+        if (divs[i].id === 'dot-index-' + index) {
+            divs[i].className = "dot active"
+        } else {
+            divs[i].className = "dot"
+        }
+    }
+
 }
 
 function showCorrectArrow(index) {
@@ -290,7 +310,6 @@ function hideDetails(index) {
 }
 
 function calculateOffset(startDate, current, endDate) {
-    console.log(startDate, current, endDate)
     return (current - startDate) / (endDate - startDate)
 }
 
@@ -307,7 +326,7 @@ function createTimeline(project) {
         project.gallery.map((item, index) => {
             var pictureDate = dateStringToDate(item.meta.data || item.meta.date)
             var offset = calculateOffset(startDate, pictureDate, endDate)
-            return '<button class="dot" data-glide-dir="=' + index + '" style="margin-left: ' + offset*100 + '%"></button>'
+            return '<button class="dot ' + (index==0 ? 'active' : '') + '" id="dot-index-' + index + '" data-glide-dir="=' + index + '" style="margin-left: ' + offset*100 + '%"></button>'
         }).join(" ") + 
     '</div>'
 }
