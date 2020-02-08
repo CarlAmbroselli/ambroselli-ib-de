@@ -109,58 +109,7 @@ function createDetails(project, index) {
                 '<p class="construction_start">Baubeginn: ' + parseDate(project.construction_start) + '</p>' +
                 '<p class="construction_end">Fertigstellung: ' + parseDate(project.construction_end) + '</p>' +
             '</div>'+
-        '</div>'
-    ;
-
-    // var html =
-    //     '<div class="details hidden" id="project-' + index + '">' +
-    //     '<div class="close-button" onclick="hideDetails(' + index + ')"></div>' +
-    //     '            <div class="slideshow">' +
-    //     '                <div class="slideshow-container">';
-    //     if (project.gallery.length > 0) {
-    //      html = html +
-    //         '                    <span class="prev arrow" onclick="showPreviousGalleryImage()"></span>' +
-    //         '                    <div class="slideshow-image" style="background-image: url(\'' + getThumbnail(project.gallery[0].path, 800) + '\')"></div>' +
-    //         '                    <span class="next arrow" onclick="showNextGalleryImage()"></span>';
-    //     }
-
-    //     html = html +
-    //     '                </div>' +
-    //     '            </div>' +
-    //     '' +
-    //     '            <div class="text">' +
-    //     '                <h3 class="details-headline">' + detailsHeadline + '</h3>';
-
-    //     if (project.details_description) {
-    //         html = html + '<p class="description">' + project.details_description + '</p>'
-    //     };
-    //     if (project.construction_start) {
-    //         html = html + '<h4 class="construction-start">Baubeginn: ' + project.construction_start + '</h4>'
-    //     };
-    //     html = html +
-    //     '                <div class="links">';
-
-    //     if (project.gallery) {
-    //         project.gallery.forEach(function(item, index) {
-    //             var date = ''
-    //             if (item.meta.date) {
-    //                 date = item.meta.date + ' '
-    //             }
-    //             html += '<span onclick="showGalleryImage(' + index + ')">' + date + item.meta.title + '</span>'
-    //             html += '<img src="' + getThumbnail(item.path) + '" class="mobile-image" />'
-    //         })
-    //     }
-    //     html = html +
-    //     '                </div>'
-
-    //     if (project.construction_end) {
-    //         var start = new Date()
-    //         html = html + '<h4 class="construction-end">Fertigstellung: ' + project.construction_end + '</h4>'
-    //     };
-    //     html = html +
-    //     '            </div>' +
-    //     '        </div>' +
-    //     '    </div>';
+        '</div>';
 
     var detailsElement =  detailsElement = createElementFromHTML(html)
 
