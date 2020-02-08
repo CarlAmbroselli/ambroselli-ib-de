@@ -90,6 +90,7 @@ function createDetails(project, index) {
                 <ul class="glide__slides">
                     ` + 
                         project.gallery.map(item => {
+                            console.log(item)
                             //return '<div class="slideshow-image" style="background-image: url(\'' + getThumbnail(project.gallery[0].path, 800)  + '\')"></div>'
                             return '<li class="glide__slide">' + 
                                     '<div class="slideshow-image" style="background-image: url(\'' + getThumbnail(item.path, 800)  + '\')"></div>' + 
@@ -99,10 +100,10 @@ function createDetails(project, index) {
                 </ul>
                 </div>
                 <div class="glide__arrows" data-glide-el="controls">
-                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                    <button class="glide__arrow glide__arrow--left control-button prev" data-glide-dir="<"><span class="prev arrow"></span></button>
+                    <button class="glide__arrow glide__arrow--right control-button next" data-glide-dir=">"><span class="next arrow"></span></button>
                 </div>
-                ${createTimeline([0.2,0.5,0.75])}
+                ${createTimeline(project)}
                 <p class="construction_start">Baubeginn: ${parseDate(project.construction_start)}</p>
                 <p class="construction_end">Fertigstellung: ${parseDate(project.construction_end)}</p>
             </div>
@@ -288,13 +289,42 @@ function hideDetails(index) {
     showCorrectArrow(-1);
 }
 
-function createTimeline(indices, elapsed=0.25) {
+function calculateOffset(startDate, current, endDate) {
+    console.log(startDate, current, endDate)
+    return (current - startDate) / (endDate - startDate)
+}
+
+function createTimeline(project) {
+    console.log("create timeline", project, project.construction_end)
+    var startDate = dateStringToDate(project.construction_start)
+    var endDate = dateStringToDate(project.construction_end)
+    var today = new Date()
+    var elapsed = calculateOffset(startDate, today, endDate)
+    console.log("elapsed", elapsed)
+
     return '<div class="timeline" data-glide-el="controls[nav]">' + 
      '   <div class="line" style="background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ' + elapsed*100 + '%, rgba(200,200,200,1) ' + elapsed*100 + '%, rgba(200,200,200,1) 100%)"></div>' + 
-        indices.map((position, index) => {
-            return '<button class="dot" data-glide-dir="=' + index + '" style="margin-left: ' + position*100 + '%"></button>'
+        project.gallery.map((item, index) => {
+            var pictureDate = dateStringToDate(item.meta.data || item.meta.date)
+            var offset = calculateOffset(startDate, pictureDate, endDate)
+            return '<button class="dot" data-glide-dir="=' + index + '" style="margin-left: ' + offset*100 + '%"></button>'
         }).join(" ") + 
     '</div>'
+}
+
+function dateStringToDate(dateString) {
+    try {
+        dateString = dateString.split(' ')[0]
+        if (dateString.indexOf("-") > -1) {
+            return new Date(dateString.trim())
+        } else {
+            return new
+             Date(dateString.trim().split('.')[2] + '-' + dateString.trim().split('.')[1] + '-' + dateString.trim().split('.')[0])
+        }
+    } catch(e) {
+        console.error(e, "Failed to parse ", dateString)
+        return new Date()
+    }
 }
 
 function refreshProjectsOrder() {

@@ -140,6 +140,42 @@
                 width: 100%;
                 text-align: right;
             }
+
+            .control-button {
+                background: none;
+                border: none;
+                position: absolute;
+                top: 50%;
+                outline: none;
+                margin: 0;
+
+                &.prev {
+                    left: 0px;
+                }
+
+                &.next {
+                    right: 0px;
+                }
+            }
+
+            .arrow {
+                display: block;
+                content: '';
+                width: 90px;
+                height: 90px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                cursor: pointer;
+                &.prev {
+                    margin-top: -50px;
+                    background-image: url('/assets/svg/arrow.svg');
+                }
+                &.next {
+                    margin-top: -50px;
+                    background-image: url('/assets/svg/arrow-next.svg');
+                }
+            }
         }
     }
 }
