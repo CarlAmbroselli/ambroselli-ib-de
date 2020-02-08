@@ -297,7 +297,6 @@ function calculateOffset(startDate, current, endDate) {
 }
 
 function createTimeline(project) {
-    console.log("create timeline", project, project.construction_end)
     var startDate = dateStringToDate(project.construction_start)
     var endDate = dateStringToDate(project.construction_end)
     var today = new Date()
