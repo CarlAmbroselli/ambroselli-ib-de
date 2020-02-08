@@ -9,6 +9,7 @@ var activeProjectIndex;
 var activeLoadId = ""
 var loadedProjects = [];
 var currentBrowserWidth = document.documentElement.clientWidth;
+var commingSoonPicturePath = "/anpassen/storage/uploads/2020/01/27/5e2e96f3916c4DSCF0188.jpg"
 
 function loadAllProjects(filter, category='Projekte') {
     highlightActiveLink(filter);
@@ -103,6 +104,19 @@ function createDetails(project, index) {
 
     var glideId = "glide-" + index;
 
+    if (project.gallery.length == 0) {
+        project.gallery = [
+            {
+                meta: {
+                    title: "Es geht bald los!",
+                    date: project.construction_start
+                },
+                path: commingSoonPicturePath
+            }
+        ]
+    }
+    var showArrows = (project.gallery.length > 1)
+
     var html = 
         '<div class="details" id="project-' + index + '">' +
         '   <div class="close-button" onclick="hideDetails(' + index + ')"></div>' +
@@ -119,10 +133,10 @@ function createDetails(project, index) {
                 '</ul>' + 
                 '</div>' +
                 (project.gallery.length > 0 ? ('<p id="detailPhotoHeadline">' + pictureTextForPhoto(project.gallery[0]) + '</p>') : '') +
-                '<div class="glide__arrows" data-glide-el="controls">' +
+                (showArrows ? '<div class="glide__arrows" data-glide-el="controls">' +
                     '<button class="glide__arrow glide__arrow--left control-button prev" data-glide-dir="<"><span class="prev arrow"></span></button>' + 
                     '<button class="glide__arrow glide__arrow--right control-button next" data-glide-dir=">"><span class="next arrow"></span></button>' + 
-                '</div>' + 
+                '</div>' : '') + 
                 createTimeline(project) +
                 '<p class="construction_start">Baubeginn: ' + parseDate(project.construction_start) + '</p>' +
                 '<p class="construction_end">Fertigstellung: ' + parseDate(project.construction_end) + '</p>' +
