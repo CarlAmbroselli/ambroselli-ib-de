@@ -82,6 +82,11 @@
             
             background-color: #f1f1f1;
             padding: 40px;
+
+
+            @media screen and (max-width: $mobile-max-width) {
+                padding: 40px 0;
+            }
             margin-bottom: 40px;
             position: relative;
             overflow: hidden;
@@ -91,6 +96,10 @@
                 max-height: 0;
                 padding: 0;
                 display: none;
+            }
+
+            .detailsHeadline, #detailPhotoHeadline {
+                text-align: center;
             }
 
             .close-button {
@@ -108,10 +117,10 @@
             }
 
             .glide__slide .slideshow-image {
-                height: 80vh;
+                height: 70vh;
                 width: 100%;
                 background-repeat: no-repeat;
-                background-size: contain;
+                background-size: cover;
                 background-position: center;
             }
 
@@ -136,6 +145,9 @@
                     &.active {
                         background-color: #e29302;
                         z-index: 500;
+                        height: 14px;
+                        width: 14px;
+                        margin-top: -8px;
                     }
                 }
             }
@@ -144,12 +156,18 @@
                 position: absolute;
                 width: 100%;
                 text-align: left;
+                @media screen and (max-width: $mobile-max-width) {
+                    padding-left: 10px;
+                }
             }
 
             .construction_end {
                 position: absolute;
                 width: 100%;
                 text-align: right;
+                @media screen and (max-width: $mobile-max-width) {
+                    padding-right: 10px;
+                }
             }
 
             .control-button {

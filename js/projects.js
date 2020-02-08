@@ -65,16 +65,19 @@ function createProject(project, index) {
 }
 
 function parseDate(dateString) {
-    if (dateString.indexOf('-') > -1) {
-        var d = new Date(dateString)
+    if (dateString.split(' ')[0].indexOf('-') > -1) {
+        var d = new Date(dateString.split(' ')[0])
         return ("0" + d.getDate()).slice(-2)  + "." + ("0"+(d.getMonth()+1)).slice(-2) + "." + d.getFullYear()
     } else {
         return dateString
     }
 }
 
+function pictureTextForPhoto(photo) {
+    return parseDate(photo.meta.data || photo.meta.date) + ' ' + photo.meta.title
+}
+
 function createDetails(project, index) {
-    console.log(project)
     var detailsHeadline = project.subheadline;
     if (project.details_headline) {
         detailsHeadline = project.details_headline;
@@ -85,31 +88,29 @@ function createDetails(project, index) {
     var html = 
         '<div class="details" id="project-' + index + '">' +
         '   <div class="close-button" onclick="hideDetails(' + index + ')"></div>' +
-        `   <div class="glide" id="${glideId}">
-                <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
-                    ` + 
+        ' <p class="detailsHeadline">' + detailsHeadline + '</p>' +
+        '   <div class="glide" id="' + glideId + '">' +
+                '<div class="glide__track" data-glide-el="track">' +
+                '<ul class="glide__slides">' +  
                         project.gallery.map(item => {
                             console.log(item)
-                            //return '<div class="slideshow-image" style="background-image: url(\'' + getThumbnail(project.gallery[0].path, 800)  + '\')"></div>'
                             return '<li class="glide__slide">' + 
-                                    '<div class="slideshow-image" style="background-image: url(\'' + getThumbnail(item.path, 800)  + '\')"></div>' + 
+                                    '<div class="slideshow-image" style="background-image: url(\'' + getThumbnail(item.path, 1600)  + '\')"></div>' + 
                                 '</li>'
                         }).join(" ") +
-                    `
-                </ul>
-                </div>
-                <div class="glide__arrows" data-glide-el="controls">
-                    <button class="glide__arrow glide__arrow--left control-button prev" data-glide-dir="<"><span class="prev arrow"></span></button>
-                    <button class="glide__arrow glide__arrow--right control-button next" data-glide-dir=">"><span class="next arrow"></span></button>
-                </div>
-                ${createTimeline(project)}
-                <p class="construction_start">Baubeginn: ${parseDate(project.construction_start)}</p>
-                <p class="construction_end">Fertigstellung: ${parseDate(project.construction_end)}</p>
-            </div>
-
-        </div>
-    `;
+                '</ul>' + 
+                '</div>' +
+                (project.gallery.length > 0 ? ('<p id="detailPhotoHeadline">' + pictureTextForPhoto(project.gallery[0]) + '</p>') : '') +
+                '<div class="glide__arrows" data-glide-el="controls">' +
+                    '<button class="glide__arrow glide__arrow--left control-button prev" data-glide-dir="<"><span class="prev arrow"></span></button>' + 
+                    '<button class="glide__arrow glide__arrow--right control-button next" data-glide-dir=">"><span class="next arrow"></span></button>' + 
+                '</div>' + 
+                createTimeline(project) +
+                '<p class="construction_start">Baubeginn: ' + parseDate(project.construction_start) + '</p>' +
+                '<p class="construction_end">Fertigstellung: ' + parseDate(project.construction_end) + '</p>' +
+            '</div>'+
+        '</div>'
+    ;
 
     // var html =
     //     '<div class="details hidden" id="project-' + index + '">' +
@@ -175,7 +176,6 @@ function createDetails(project, index) {
 }
 
 function highlightCurrentPhoto(index) {
-    console.log("highlight", index)
     var divs = document.querySelectorAll('.timeline .dot');
     for (i = 0; i < divs.length; ++i) {
         if (divs[i].id === 'dot-index-' + index) {
@@ -185,6 +185,8 @@ function highlightCurrentPhoto(index) {
         }
     }
 
+    var photoText = document.querySelector("#detailPhotoHeadline")
+    photoText.innerHTML = pictureTextForPhoto(loadedProjects[activeProjectIndex].gallery[index])
 }
 
 function showCorrectArrow(index) {
