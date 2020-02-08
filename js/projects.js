@@ -9,10 +9,12 @@ var activeProjectIndex;
 var activeLoadId = ""
 var loadedProjects = [];
 var currentBrowserWidth = document.documentElement.clientWidth;
+var activeCategory = ''
 var commingSoonPicturePath = "/anpassen/storage/uploads/2020/01/27/5e2e96f3916c4DSCF0188.jpg"
 
 function loadAllProjects(filter, category='Projekte') {
     highlightActiveLink(filter);
+    activeCategory = category
     activeLoadId = generateId()
     loadJSON(backend + '/api/collections/get/' + category, function(result) {
         loadedProjects = result.entries;
@@ -28,7 +30,6 @@ function loadAllProjects(filter, category='Projekte') {
             })
             return project
         })
-        console.log(loadedProjects)
         document.querySelector('.projects-page .items').innerHTML = ''
         loadNextProjects(loadedProjects, category, filter, 0, activeLoadId)
     })
@@ -88,7 +89,11 @@ function parseDate(dateString) {
             return dateString
         }
     } catch(e) {
-        return dateString
+        if (dateString) {
+            return dateString
+        } else {
+            return ''
+        }
     }
 }
 
@@ -137,9 +142,9 @@ function createDetails(project, index) {
                     '<button class="glide__arrow glide__arrow--left control-button prev" data-glide-dir="<"><span class="prev arrow"></span></button>' + 
                     '<button class="glide__arrow glide__arrow--right control-button next" data-glide-dir=">"><span class="next arrow"></span></button>' + 
                 '</div>' : '') + 
-                createTimeline(project) +
+                (activeCategory !== 'highlights' ? createTimeline(project) +
                 '<p class="construction_start">Baubeginn: ' + parseDate(project.construction_start) + '</p>' +
-                '<p class="construction_end">Fertigstellung: ' + parseDate(project.construction_end) + '</p>' +
+                '<p class="construction_end">Fertigstellung: ' + parseDate(project.construction_end) + '</p>' : '') +
             '</div>'+
         '</div>';
 
@@ -284,7 +289,6 @@ function showDetails(index, onlyResize) {
 }
 
 function hideDetails(index) {
-    console.log("Hide" + index)
     var element = document.querySelector(".items .details#project-" + index);
     if (element) {
         element.parentNode.removeChild(element)
@@ -301,7 +305,6 @@ function createTimeline(project) {
     var endDate = dateStringToDate(project.construction_end)
     var today = new Date()
     var elapsed = calculateOffset(startDate, today, endDate)
-    console.log("elapsed", elapsed)
 
     return '<div class="timeline" data-glide-el="controls[nav]">' + 
      '   <div class="line" style="background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ' + elapsed*100 + '%, rgba(200,200,200,1) ' + elapsed*100 + '%, rgba(200,200,200,1) 100%)"></div>' + 
