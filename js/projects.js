@@ -102,6 +102,10 @@ function pictureTextForPhoto(photo) {
 }
 
 function createDetails(project, index) {
+    var existingDetail = document.querySelector('#project-' + index);
+    if (existingDetail) {
+        existingDetail.parentNode.removeChild(existingDetail)
+    }
     var detailsHeadline = project.subheadline;
     if (project.details_headline) {
         detailsHeadline = project.details_headline;
