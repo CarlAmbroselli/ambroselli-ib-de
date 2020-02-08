@@ -98,8 +98,12 @@
                 display: none;
             }
 
-            .detailsHeadline, #detailPhotoHeadline {
+            .detailsHeadline, #detailPhotoHeadline, .detailsSubHeadline {
                 text-align: center;
+            }
+
+            .detailsSubHeadline {
+                color: #555555;
             }
 
             .close-button {

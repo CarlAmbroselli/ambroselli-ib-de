@@ -15,8 +15,21 @@ function loadAllProjects(filter, category='Projekte') {
     activeLoadId = generateId()
     loadJSON(backend + '/api/collections/get/' + category, function(result) {
         loadedProjects = result.entries;
+        loadedProjects = loadedProjects.map(function(project) {
+            project.gallery.sort(function(a, b) {
+                var dateA = a.meta.data || a.meta.date
+                var dateB = b.meta.data || b.meta.date
+                if (dateA > dateB) {
+                    return 1
+                } else {
+                    return -1
+                }
+            })
+            return project
+        })
+        console.log(loadedProjects)
         document.querySelector('.projects-page .items').innerHTML = ''
-        loadNextProjects(result.entries, category, filter, 0, activeLoadId)
+        loadNextProjects(loadedProjects, category, filter, 0, activeLoadId)
     })
 }
 
@@ -66,10 +79,14 @@ function createProject(project, index) {
 }
 
 function parseDate(dateString) {
-    if (dateString.split(' ')[0].indexOf('-') > -1) {
-        var d = new Date(dateString.split(' ')[0])
-        return ("0" + d.getDate()).slice(-2)  + "." + ("0"+(d.getMonth()+1)).slice(-2) + "." + d.getFullYear()
-    } else {
+    try {
+        if (dateString.split(' ')[0].indexOf('-') > -1) {
+            var d = new Date(dateString.split(' ')[0])
+            return ("0" + d.getDate()).slice(-2)  + "." + ("0"+(d.getMonth()+1)).slice(-2) + "." + d.getFullYear()
+        } else {
+            return dateString
+        }
+    } catch(e) {
         return dateString
     }
 }
@@ -90,11 +107,11 @@ function createDetails(project, index) {
         '<div class="details" id="project-' + index + '">' +
         '   <div class="close-button" onclick="hideDetails(' + index + ')"></div>' +
         ' <p class="detailsHeadline">' + detailsHeadline + '</p>' +
+        ' <p class="detailsSubHeadline">' + project.details_description + '</p>' +
         '   <div class="glide" id="' + glideId + '">' +
                 '<div class="glide__track" data-glide-el="track">' +
                 '<ul class="glide__slides">' +  
-                        project.gallery.map(item => {
-                            console.log(item)
+                        project.gallery.map(function(item) {
                             return '<li class="glide__slide">' + 
                                     '<div class="slideshow-image" style="background-image: url(\'' + getThumbnail(item.path, 1600)  + '\')"></div>' + 
                                 '</li>'
@@ -275,7 +292,7 @@ function createTimeline(project) {
 
     return '<div class="timeline" data-glide-el="controls[nav]">' + 
      '   <div class="line" style="background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ' + elapsed*100 + '%, rgba(200,200,200,1) ' + elapsed*100 + '%, rgba(200,200,200,1) 100%)"></div>' + 
-        project.gallery.map((item, index) => {
+        project.gallery.map(function(item, index) {
             var pictureDate = dateStringToDate(item.meta.data || item.meta.date)
             var offset = calculateOffset(startDate, pictureDate, endDate)
             return '<button class="dot ' + (index==0 ? 'active' : '') + '" id="dot-index-' + index + '" data-glide-dir="=' + index + '" style="margin-left: ' + offset*100 + '%"></button>'
