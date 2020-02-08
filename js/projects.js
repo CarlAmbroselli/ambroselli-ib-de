@@ -8,6 +8,7 @@ var itemsPerLoad = 9;
 var activeProjectIndex;
 var activeLoadId = ""
 var loadedProjects = [];
+var currentBrowserWidth = document.documentElement.clientWidth;
 
 function loadAllProjects(filter, category='Projekte') {
     highlightActiveLink(filter);
@@ -297,6 +298,13 @@ function dateStringToDate(dateString) {
     }
 }
 
+function handleResize(e) {
+    if (document.documentElement.clientWidth !== currentBrowserWidth) {
+        currentBrowserWidth = document.documentElement.clientWidth;
+        refreshProjectsOrder()
+    }
+}
+
 function refreshProjectsOrder() {
     var activeDetails = document.querySelector('.items .details:not(.hidden)')
     if (activeDetails) {
@@ -311,7 +319,7 @@ function generateId() {
 }
 
 function main() {
-    window.addEventListener('resize', refreshProjectsOrder, false);
+    window.addEventListener('resize', handleResize, false);
     loadAllProjects()
 }
 
