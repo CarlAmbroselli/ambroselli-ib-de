@@ -64,6 +64,15 @@ function createProject(project, index) {
     document.querySelector('.projects-page .items').appendChild(projectElement)
 }
 
+function parseDate(dateString) {
+    if (dateString.indexOf('-') > -1) {
+        var d = new Date(dateString)
+        return ("0" + d.getDate()).slice(-2)  + "." + ("0"+(d.getMonth()+1)).slice(-2) + "." + d.getFullYear()
+    } else {
+        return dateString
+    }
+}
+
 function createDetails(project, index) {
     console.log(project)
     var detailsHeadline = project.subheadline;
@@ -94,6 +103,8 @@ function createDetails(project, index) {
                     <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
                 </div>
                 ${createTimeline([0.2,0.5,0.75])}
+                <p class="construction_start">Baubeginn: ${parseDate(project.construction_start)}</p>
+                <p class="construction_end">Fertigstellung: ${parseDate(project.construction_end)}</p>
             </div>
 
         </div>
@@ -277,15 +288,13 @@ function hideDetails(index) {
     showCorrectArrow(-1);
 }
 
-function createTimeline(indices) {
-    return `
-    <div class="timeline" data-glide-el="controls[nav]">
-        <div class="line"></div>
-        ${indices.map((position, index) => {
+function createTimeline(indices, elapsed=0.25) {
+    return '<div class="timeline" data-glide-el="controls[nav]">' + 
+     '   <div class="line" style="background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) ' + elapsed*100 + '%, rgba(200,200,200,1) ' + elapsed*100 + '%, rgba(200,200,200,1) 100%)"></div>' + 
+        indices.map((position, index) => {
             return '<button class="dot" data-glide-dir="=' + index + '" style="margin-left: ' + position*100 + '%"></button>'
-        }).join(" ")}
-    </div>
-    `
+        }).join(" ") + 
+    '</div>'
 }
 
 function refreshProjectsOrder() {
