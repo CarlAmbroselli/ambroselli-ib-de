@@ -171,6 +171,7 @@
             }
 
             .control-button {
+                height: 90px;
                 background: none;
                 border: none;
                 position: absolute;
@@ -180,10 +181,12 @@
 
                 &.prev {
                     left: 0px;
+                    margin-top: -50px;
                 }
 
                 &.next {
                     right: 0px;
+                    margin-top: -50px;
                 }
             }
 
@@ -197,11 +200,9 @@
                 background-size: contain;
                 cursor: pointer;
                 &.prev {
-                    margin-top: -50px;
                     background-image: url('/assets/svg/arrow.svg');
                 }
                 &.next {
-                    margin-top: -50px;
                     background-image: url('/assets/svg/arrow-next.svg');
                 }
             }
