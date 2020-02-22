@@ -1,5 +1,5 @@
 var imageToken = "b36f5945dfa236521592b259136ec2";
-var backend = 'https://ambroselli-ib.de/anpassen'
+var backend = 'https://anpassen.ambroselli-ib.de/anpassen'
 var backendReponse = {}
 
 function loadJSON(path, success, error) {
